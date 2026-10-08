@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#ffd400">
+<meta name="description" content="Promosyon kupon kartı">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Promosyon Kuponu</title>
+<style>
+:root{--yellow:#ffd400;--yellow2:#ffe83b;--red:#e30613;--blue:#0755a5;--ink:#111827;--muted:#667085;--green:#159447;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
+body{min-height:100dvh;overflow-x:hidden;background:#222}
+.bg{position:fixed;inset:-22px;background:url("./campaign-bg.jpg") center/cover no-repeat;filter:blur(13px);transform:scale(1.06);opacity:.42;z-index:-3}
+.scrim{position:fixed;inset:0;background:linear-gradient(145deg,rgba(255,212,0,.74),rgba(227,6,19,.35) 50%,rgba(3,38,78,.62));z-index:-2}
+.page{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:calc(18px + var(--safe-top)) 16px calc(22px + var(--safe-bottom))}
+.shell{width:min(430px,100%)}
+.card{overflow:hidden;border-radius:28px;background:#fff;box-shadow:0 22px 60px #0007;border:3px solid var(--yellow)}
+.top{padding:18px 18px 16px;background:linear-gradient(125deg,var(--red),#c9000c 55%,var(--yellow));color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:28px;font-weight:1000;letter-spacing:-.06em}
+.badge{font-size:10px;font-weight:900;background:#fff;color:var(--red);padding:7px 9px;border-radius:9px}
+.content{padding:20px 18px 18px}
+.kicker{font-size:11px;font-weight:900;color:var(--red);letter-spacing:.1em;text-transform:uppercase}
+h1{font-size:27px;line-height:1.05;margin:7px 0 8px;letter-spacing:-.04em}
+.desc{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.45}
+.offer{display:flex;gap:12px;align-items:center;padding:13px;border-radius:17px;background:#fff8cf;border:1px solid #f3df62;margin-bottom:18px}
+.icon{width:44px;height:44px;flex:0 0 44px;border-radius:14px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:21px}
+.offer b{display:block;font-size:14px}.offer span{display:block;margin-top:2px;font-size:12px;color:#6b7280}
+.label{text-align:center;font-size:10px;font-weight:900;color:#777;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.codebox{display:flex;align-items:center;gap:8px;padding:8px;border:2px dashed var(--red);border-radius:18px;background:#fffdf1}
+.code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:9px 8px;font:900 20px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--red)}
+.copy{border:0;border-radius:13px;background:var(--yellow);color:#111;font-weight:1000;padding:13px 12px;min-width:91px;cursor:pointer;box-shadow:0 5px 12px #0002}
+.copy:active{transform:scale(.97)}.copy.ok{background:var(--green);color:#fff}.copy:disabled{cursor:wait;opacity:.9}
+.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+.shop{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:13px;border-radius:14px;background:#111;color:#fff;font-weight:900;font-size:14px}
+.meta{display:flex;justify-content:space-between;gap:10px;margin-top:14px;font-size:11px;color:#777}
+.footer{padding:12px 16px;background:#111;color:#d1d5db;font-size:10px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#111;color:#fff;border:1px solid #ffffff22;padding:12px 15px;border-radius:14px;font-size:12px;font-weight:800;box-shadow:0 12px 30px #0006;transition:.22s ease;z-index:20;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (min-width:700px){.page{padding:40px}.content{padding:24px}.top{padding:20px 22px}}
+</style>
+<meta property="og:title" content="İNDİRİM KUPONU">
+<meta property="og:description" content="ŞOK İndirim Kampanyası">
+<meta property="og:image" content="https://arzuoglumammad-star.github.io/reklama-click-lab/og-preview.jpg">
+<meta property="og:image:secure_url" content="https://arzuoglumammad-star.github.io/reklama-click-lab/og-preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="630">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="İNDİRİM KUPONU">
+<meta property="og:url" content="https://arzuoglumammad-star.github.io/reklama-click-lab/?v=29080">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="İNDİRİM KUPONU">
+<meta name="twitter:image" content="https://arzuoglumammad-star.github.io/reklama-click-lab/og-preview.jpg">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div><div class="scrim" aria-hidden="true"></div>
+<main class="page"><section class="shell" aria-label="Promosyon kuponu"><article class="card">
+<header class="top"><div class="brand">ŞOK</div><div class="badge">ÖZEL FIRSAT</div></header>
+<div class="content">
+<div class="kicker">Özel fırsat</div><h1>Promosyon Kuponu</h1>
+<p class="desc">Kodu kopyalayarak fırsatınızı kullanabilirsiniz.</p>
+<div class="offer"><div class="icon">%</div><div><b>Güçlü promosyon kodu</b><span>Tek dokunuşla panoya kopyala</span></div></div>
+<div class="label">Promosyon kodu</div>
+<div class="codebox"><div class="code" id="promoCode">SK2026X7P4M9Q</div><button class="copy" id="copyBtn" type="button">Kopyala</button></div>
+<div class="actions"><a class="shop" href="https://www.sokmarket.com.tr/" target="_blank" rel="noopener noreferrer">Resmî siteye git</a></div>
+<div class="meta"><span>Promosyon kodu</span><span>Koşullar kampanyaya göre değişebilir</span></div>
+</div>
+<footer class="footer">Promosyon fırsatı • Koşullar geçerlidir</footer>
+</article></section></main>
+<div class="toast" id="toast" role="status" aria-live="polite">Kod kopyalandı</div>
+<script>
+(function(){
+ const codeEl=document.getElementById("promoCode"),copyBtn=document.getElementById("copyBtn"),toast=document.getElementById("toast");
+ const OFFICIAL_URL="https://www.sokmarket.com.tr/";
+ function showToast(message){toast.textContent=message;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),900)}
+ async function copyAndRedirect(){
+   const code=codeEl.textContent.trim();copyBtn.disabled=true;
+   try{
+     await navigator.clipboard.writeText(code);
+     copyBtn.textContent="Kopyalandı";copyBtn.classList.add("ok");showToast("Kod kopyalandı");
+     setTimeout(()=>{window.location.href=OFFICIAL_URL},900);
+   }catch(error){
+     copyBtn.textContent="Devam";showToast("Kampanyaya yönlendiriliyorsunuz");
+     setTimeout(()=>{window.location.href=OFFICIAL_URL},500);
+   }
+ }
+ copyBtn.addEventListener("click",copyAndRedirect);
+})();
+</script>
+</body>
+</html>
