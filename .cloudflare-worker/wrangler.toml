@@ -1,0 +1,8 @@
+name = "kupon-click-report"
+main = "worker.js"
+compatibility_date = "2026-10-09"
+
+[vars]
+GITHUB_OWNER = "Sokmarket"
+GITHUB_REPO = "Kupon"
+GITHUB_BRANCH = "main"
