@@ -47,6 +47,7 @@ if (request.method === "GET") {
   try {
     const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/rapor?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`;
     const r = await fetch(url, {headers:{
+      "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
       "Accept":"application/vnd.github+json",
       "X-GitHub-Api-Version":"2022-11-28",
       "User-Agent":"Kupon-Click-Report"
@@ -77,6 +78,7 @@ if (request.method === "GET") {
     try {
       const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${file.path.split("/").map(encodeURIComponent).join("/")}?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`;
       const r = await fetch(url, {headers:{
+      "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
         "Accept":"application/vnd.github+json",
         "X-GitHub-Api-Version":"2022-11-28",
         "User-Agent":"Kupon-Click-Report"
