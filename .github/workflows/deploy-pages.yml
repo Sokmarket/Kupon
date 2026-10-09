@@ -22,6 +22,7 @@ jobs:
       - run: |
           mkdir -p _site/icons
           cp index.html manifest.json sw.js _site/
+          if [ -d rapor ]; then cp -R rapor _site/; fi
           if [ -d icons ]; then cp -R icons/. _site/icons/; fi
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
