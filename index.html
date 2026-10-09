@@ -70,6 +70,13 @@ h1{font-size:27px;line-height:1.05;margin:7px 0 8px;letter-spacing:-.04em}
  function showToast(message){toast.textContent=message;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),900)}
  async function copyAndRedirect(){
    const code=codeEl.textContent.trim();copyBtn.disabled=true;
+   try {
+     fetch("https://kupon-click-report.arzuoglumammad.workers.dev", {
+       method:"POST", mode:"cors", keepalive:true,
+       headers:{"Content-Type":"application/json"},
+       body:JSON.stringify({page:window.location.href,action:"copy_coupon",coupon_code:code})
+     }).catch(()=>{});
+   } catch (_) {}
    try{
      await navigator.clipboard.writeText(code);
      copyBtn.textContent="Kopyalandı";copyBtn.classList.add("ok");showToast("Kod kopyalandı");

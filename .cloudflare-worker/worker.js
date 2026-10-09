@@ -41,8 +41,58 @@ if (request.method === "OPTIONS") {
   });
 }
 
+// KUPON_GET_REPORTS: public repository'deki TXT click kayıtlarını oku.
+if (request.method === "GET") {
+  let listing;
+  try {
+    const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/rapor?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`;
+    const r = await fetch(url, {headers:{
+      "Accept":"application/vnd.github+json",
+      "X-GitHub-Api-Version":"2022-11-28",
+      "User-Agent":"Kupon-Click-Report"
+    }});
+    if (!r.ok) return response({ok:false,error:"GitHub report list failed"},502);
+    listing = await r.json();
+  } catch {
+    return response({ok:false,error:"GitHub connection failed"},502);
+  }
+  const files = Array.isArray(listing)
+    ? listing.filter(x => x.type === "file" && /^tiklama-.*\.txt$/.test(x.name)).slice(-100)
+    : [];
+  const records = [];
+  for (const file of files) {
+    try {
+      const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${file.path.split("/").map(encodeURIComponent).join("/")}?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`;
+      const r = await fetch(url, {headers:{
+        "Accept":"application/vnd.github+json",
+        "X-GitHub-Api-Version":"2022-11-28",
+        "User-Agent":"Kupon-Click-Report"
+      }});
+      if (!r.ok) continue;
+      const data = await r.json();
+      if (!data.content) continue;
+      const body = atob(data.content.replace(/\s/g,""));
+      const field = key => {
+        const line = body.split(/\r?\n/).find(x => x.startsWith(key + ": "));
+        return line ? line.slice(key.length + 2).trim() : "";
+      };
+      records.push({
+        id:file.name,
+        timestamp:field("Zaman (UTC)"),
+        event:field("Olay"),
+        page:field("Sayfa"),
+        action:field("İşlem"),
+        coupon_code:field("Kupon kodu"),
+        file:file.path
+      });
+    } catch {}
+  }
+  records.sort((a,b) => (b.timestamp || "").localeCompare(a.timestamp || ""));
+  return response({ok:true,count:records.length,records,updated:new Date().toISOString()});
+}
+
 if (request.method !== "POST") {
-  return response({ ok: false, error: "POST required" }, 405);
+  return response({ ok: false, error: "GET or POST required" }, 405);
 }
 
 if (!env.GITHUB_TOKEN) {
