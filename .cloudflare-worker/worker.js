@@ -86,10 +86,11 @@ if (request.method === "GET") {
       if (!r.ok) continue;
       const data = await r.json();
       if (!data.content) continue;
-      const body = atob(data.content.replace(/\s/g,""));
+      const body = decodeURIComponent(escape(atob(data.content.replace(/\s/g,""))));
       const field = key => {
-        const line = body.split(/\r?\n/).find(x => x.startsWith(key + ": "));
-        return line ? line.slice(key.length + 2).trim() : "";
+        const prefix = key + ":";
+        const line = body.split(/\r?\n/).find(x => x.trimStart().startsWith(prefix));
+        return line ? line.trimStart().slice(prefix.length).trim() : "";
       };
       records.push({
         id:file.name,
