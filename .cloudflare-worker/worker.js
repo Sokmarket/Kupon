@@ -24,11 +24,11 @@ export default {
 async fetch(request, env) {
 const origin = request.headers.get("Origin") || "";
 
-if (origin !== ALLOWED_ORIGIN) {
-  return response({ ok: false, error: "Origin not allowed" }, 403);
-}
-
+// Tarayıcı preflight isteği yalnızca izin verilen kaynaktan kabul edilir.
 if (request.method === "OPTIONS") {
+  if (origin !== ALLOWED_ORIGIN) {
+    return response({ ok: false, error: "Origin not allowed" }, 403);
+  }
   return new Response(null, {
     status: 204,
     headers: {
@@ -39,6 +39,12 @@ if (request.method === "OPTIONS") {
       "Vary": "Origin"
     }
   });
+}
+
+// Kaynak başlığı verilmişse farklı web kaynaklarını reddet.
+// Origin başlığı olmayan doğrudan GET gezinmelerine izin ver.
+if (origin && origin !== ALLOWED_ORIGIN) {
+  return response({ ok: false, error: "Origin not allowed" }, 403);
 }
 
 // KUPON_GET_REPORTS: public repository'deki TXT click kayıtlarını oku.
