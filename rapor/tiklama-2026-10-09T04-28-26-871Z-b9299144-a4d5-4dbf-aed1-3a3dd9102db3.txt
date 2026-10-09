@@ -1,0 +1,10 @@
+KUPON TIKLAMA RAPORU
+====================
+Zaman (UTC): 2026-10-09T04:28:26.871Z
+Olay: page_visit
+Sayfa: https://sokmarket.github.io/Kupon/?visit_test=1
+İşlem: page_open
+Kupon kodu: (belirtilmedi)
+
+Not: Bu dosya bir tıklama olayını kaydeder.
+IP adresi ve tarayıcı kimliği kaydedilmemiştir.
