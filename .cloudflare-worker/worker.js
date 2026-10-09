@@ -124,7 +124,7 @@ try {
 // IP adresi, çerez, user-agent ve kişisel profil kaydedilmez.
 const now = new Date();
 const event = {
-  event: "kupon_click",
+  event: safeText(input.event, 60) === "page_visit" ? "page_visit" : "kupon_click",
   timestamp_utc: now.toISOString(),
   page: safeText(input.page, 200),
   action: safeText(input.action, 60) || "copy_coupon",
