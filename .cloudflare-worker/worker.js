@@ -51,7 +51,20 @@ if (request.method === "GET") {
       "X-GitHub-Api-Version":"2022-11-28",
       "User-Agent":"Kupon-Click-Report"
     }});
-    if (!r.ok) return response({ok:false,error:"GitHub report list failed"},502);
+    if (!r.ok) {
+      let detail = {};
+      try { detail = await r.clone().json(); } catch {}
+      const message = typeof detail.message === "string"
+        ? detail.message.replace(/[\\r\\n\\t]/g, " ").slice(0, 180)
+        : "No additional message";
+      return response({
+        ok: false,
+        error: "GitHub report list failed",
+        github_status: r.status,
+        github_message: message,
+        config_present: Boolean(env.GITHUB_OWNER && env.GITHUB_REPO && env.GITHUB_BRANCH)
+      }, 502);
+    }
     listing = await r.json();
   } catch {
     return response({ok:false,error:"GitHub connection failed"},502);
